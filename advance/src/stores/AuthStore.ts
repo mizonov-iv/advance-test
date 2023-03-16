@@ -33,6 +33,7 @@ export const useAuthStore = defineStore("user", () => {
             .then((response) => {
                 if(response.status === 200) {
                     console.log('status 200')
+                    console.log(response.data)
                 }
             })
             .catch(error => {
