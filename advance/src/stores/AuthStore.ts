@@ -4,41 +4,35 @@ import axios from "axios";
 
 export const useAuthStore = defineStore("user", () => {
     const userInput = ref({
-        username: "",
+        user: "",
         password: "",
     })
 
-    const updateUserInput = (username: string, password: any) => {
-        userInput.value.username = username
+    const role = ref("")
+
+    const updateUserInput = (user: string, password: any) => {
+        userInput.value.user = user
         userInput.value.password = password
         console.log(userInput.value)
-
         checkRole()
+        // login()
     }
 
-    const checkRole = () => {
+    const checkRole = async () => {
+        const resp = await axios.post("http://localhost:3000/users", userInput.value).then(response => {
+            console.log(response)
+        })
+        // console.log(resp.data)
+        // resp.data.forEach((user: any) => {
+        //     console.log(user)
+        // })
+    }
 
-        // const response = axios.post(
-        //     "/api/secondary/accident/save/",
-        //     userInput.value
-        // );
-        // if (response) {
-        //     let role = response
-        // } else {
-        //     console.log('error')
-        // }
-
-
-        axios.post(`https://advanse-mizonov-default-rtdb.firebaseio.com/roles.json`, userInput.value)
-            .then((response) => {
-                if(response.status === 200) {
-                    console.log('status 200')
-                }
+    const login = () => {
+        axios.post("http://localhost:3000/", JSON.stringify(userInput.value))
+            .then(response => {
+                console.log(response)
             })
-            .catch(error => {
-                console.log('что-то пошло не так', error)
-            })
-
     }
 
     return {
