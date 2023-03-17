@@ -192,3 +192,7 @@ td, th {
 .btn-done {
   background-image: url("../public/icons/done-icon.png");
 }
+
+.btn-disabled {
+  color: #888888;
+}
