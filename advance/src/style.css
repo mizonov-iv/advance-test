@@ -30,6 +30,7 @@ body {
 .navbar__link {
   margin-right: 38px;
   color: #FFFEFE;
+  text-decoration: none;
 }
 
 .navbar__btn {
@@ -58,6 +59,11 @@ body {
   justify-content: start;
   width: 165px;
   margin-left: 36px;
+}
+
+.add-order__header {
+  margin-top: 31px;
+  margin-bottom: 33px;
 }
 
 .add-order__form {
@@ -130,4 +136,59 @@ body {
 
 .popup__btns {
   display: flex;
+}
+
+/*ORDERS TABLE*/
+table {
+  width: 300px;
+  border-collapse: collapse;
+}
+td, th {
+  padding: 15px;
+  border: 1px solid black;
+}
+
+.orders__table {
+  margin: 75px auto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  background-color: #D9D9D9;
+}
+
+.table-header {
+
+}
+
+.table__row {
+  position: relative;
+}
+
+.table-btns {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -60px;
+  display: flex;
+}
+
+.btn {
+  width: 18px;
+  height: 17px;
+  display: block;
+  margin-right: 8px;
+  border: none;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.btn-delete {
+  background-image: url("../public/icons/close-icon.png");
+}
+
+.btn-done {
+  background-image: url("../public/icons/done-icon.png");
 }

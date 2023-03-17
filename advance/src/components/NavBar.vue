@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
     <div class="navbar__item">
-      <div class="navbar__link">Все заказы</div>
-      <div class="navbar__link">Добавить заказ</div>
+      <router-link class="navbar__link" to="/orders">Все заказы</router-link>
+      <router-link class="navbar__link" to="/add-order">Добавить заказ</router-link>
     </div>
     <div class="navbar__item">
       <div>Имя Фамилия</div>

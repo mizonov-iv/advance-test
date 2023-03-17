@@ -7,7 +7,6 @@
         <button class="buttons">Отмена</button>
       </div>
     </div>
-
   </div>
 </template>
 
