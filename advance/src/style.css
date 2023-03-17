@@ -196,3 +196,7 @@ td, th {
 .btn-disabled {
   color: #888888;
 }
+
+.completed-order {
+  background-color: lightgreen;
+}

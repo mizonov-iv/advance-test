@@ -1,8 +1,11 @@
 import {ref} from "vue";
 import {defineStore} from "pinia";
 import axios from "axios";
+import {useRouter} from "vue-router";
+
 
 export const useAuthStore = defineStore("user", () => {
+    const router = useRouter()
     const userInput = ref({
         user: "",
         password: "",
@@ -52,6 +55,7 @@ export const useAuthStore = defineStore("user", () => {
                     } else {
                         if (resp.data.password === userInput.value.password) {
                             console.log('Success');
+                            router.push('/orders')
                             // sessionStorage.setItem('username', userInput.value.user);
                             // sessionStorage.setItem('userrole',resp.data.role);
                         } else {

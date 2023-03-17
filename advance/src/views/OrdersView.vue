@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-    <tr class="table__row" v-for="(order, index) in store.allOrders" :key="index">
+    <tr class="table__row" :class="{'completed-order': order.status === 'Выполнен'}" v-for="(order, index) in store.allOrders" :key="index">
       <td>{{order.id}}</td>
       <td>{{order.name}}</td>
       <td>{{order.address}}</td>
@@ -19,7 +19,10 @@
       <td>{{order.status}}</td>
       <td>{{order.comment}}</td>
       <div class="table-btns">
-        <button class="btn btn-done" v-if="order.status !== 'Выполнен'" ></button>
+        <button class="btn btn-done"
+                v-if="order.status !== 'Выполнен'"
+                @click="markAsCompleted(order)"
+        ></button>
         <button class="btn btn-delete" @click="deleteOrder(order)"></button>
       </div>
     </tr>
@@ -35,6 +38,10 @@ const store = useOrdersStore();
 
 const deleteOrder = (order) => {
   store.deleteOrder(order)
+}
+
+const markAsCompleted = (order) => {
+  store.completeTheOrder(order)
 }
 
 </script>

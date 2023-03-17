@@ -1,7 +1,7 @@
 import {ref} from "vue";
 import {defineStore} from "pinia";
 import axios from "axios";
-import {useRoute, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 
 export const useOrdersStore = defineStore("orders", () => {
     const router = useRouter()
@@ -10,9 +10,11 @@ export const useOrdersStore = defineStore("orders", () => {
     const getAllOrders = () => {
          axios.get("http://localhost:3000/events")
             .then(response => {
-                console.log(response.data)
                 allOrders.value = response.data
             })
+             .catch((err) => {
+                 console.log(err)
+             })
     }
 
     const addNewOrder = (newOrder: any) => {
@@ -24,18 +26,31 @@ export const useOrdersStore = defineStore("orders", () => {
         router.push('/orders')
     }
 
-    const deleteOrder = (order: any) => {
-        allOrders.value = allOrders.value.filter((element: any) => element.id !== order.id)
-    }
-
     const returnLastItem = (arr: any) => {
         return arr[arr.length - 1]
+    }
+
+    // const deleteOrder = (order: any) => {
+    //     allOrders.value = allOrders.value.filter((element: any) => element.id !== order.id)
+    // }
+
+    const deleteOrder = async (order: any) => {
+        await axios.delete(`http://localhost:3000/events/${order.id}`)
+        getAllOrders()
+        // allOrders.value = allOrders.value.filter((element: any) => element.id !== order.id)
+    }
+
+    const completeTheOrder = (order: any) => {
+        console.log(order.status)
+        order.status = "Выполнен"
+        console.log(order.status)
     }
 
     return {
         allOrders,
         getAllOrders,
         addNewOrder,
-        deleteOrder
+        deleteOrder,
+        completeTheOrder
     }
 })
