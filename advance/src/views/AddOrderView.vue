@@ -8,6 +8,7 @@
           placeholder="Введите ваше имя"
           autocomplete="off"
           v-model="name"
+          @input="onInputUpdate"
       >
       <input
           class="inputs"
@@ -15,6 +16,7 @@
           placeholder="Введите ваш адрес"
           autocomplete="off"
           v-model="address"
+          @input="onInputUpdate"
       >
       <input
           class="inputs"
@@ -23,18 +25,26 @@
           autocomplete="off"
           v-model="comment"
       >
-      <button class="add-order__buttons">Добавить заказ</button>
+      <button
+          class="add-order__buttons"
+          :class="{'btn-disabled': !btnDisabled}"
+          :disabled="!btnDisabled"
+      >
+        Добавить заказ
+      </button>
     </form>
   </div>
 </template>
 
 <script setup>
 import {useOrdersStore} from "../stores/OrdersStore.ts";
+import {useAuthStore} from "../stores/AuthStore.ts";
 import {ref} from "vue";
 
-const store = useOrdersStore()
+const ordersStore = useOrdersStore()
+const authStore = useAuthStore()
 
-const name = ref("")
+const name = ref(authStore.authorizedUser.name)
 const address = ref("")
 const comment = ref("")
 const date = ref(new Date().toLocaleString("ru", {
@@ -42,6 +52,14 @@ const date = ref(new Date().toLocaleString("ru", {
   month: "long",
   day: "numeric"
 }))
+
+let btnDisabled = ref(false)
+
+const onInputUpdate = () => {
+  if (name.value && address.value) {
+    btnDisabled = true;
+  }
+}
 
 const addOrder = () => {
   const newOrder = {
@@ -52,7 +70,7 @@ const addOrder = () => {
     comment: comment.value
   }
 
-  store.addNewOrder(newOrder)
+  ordersStore.addNewOrder(newOrder)
 
   name.value = ""
   address.value = ""

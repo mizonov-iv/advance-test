@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-wrapper">
+  <div class="auth__wrapper">
     <form @submit.prevent="submitForm">
       <input
           class="inputs"
@@ -11,13 +11,15 @@
       >
       <input
           class="inputs"
-
           type="text"
           placeholder="password"
           autocomplete="off"
           v-model="passwordInput"
           @input="onInputUpdate"
       >
+      <div class="auth__validation" v-if="store.validationsErrors.length">
+        <p v-for="error in store.validationsErrors">{{ error }}</p>
+      </div>
       <button
           class="buttons"
           :class="{'btn-disabled': !btnDisabled}"
@@ -25,13 +27,6 @@
       >
         Войти
       </button>
-
-
-      <div v-if="store.validationsErrors.length">
-        <p v-for="error in store.validationsErrors">{{ error }}</p>
-      </div>
-
-
     </form>
   </div>
 </template>

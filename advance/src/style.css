@@ -4,6 +4,8 @@
 /*BASE*/
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
   background-color: #E2E1E1;
@@ -11,20 +13,24 @@ body {
   color: #000000;
 }
 
+#app {
+  max-width: 1920px;
+}
+
 /*NAVBAR*/
 .navbar {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
   height: 52px;
-  padding: 13px 15px 12px 22px;
+  padding: 18px 15px 12px 12px;
   background: #165996;
 }
 
 .navbar__item {
-  width: fit-content;
   display: flex;
+  align-items: center;
 }
 
 .navbar__link {
@@ -42,7 +48,7 @@ body {
 
 
 /*AUTH VIEW*/
-.auth-wrapper {
+.auth__wrapper {
   position: absolute;
   top: 171px;
   left: 49px;
@@ -50,6 +56,11 @@ body {
   height: 245px;
   padding: 57px 108px 22px 38px;
   background-color: #D9D9D9;
+}
+
+.auth__validation {
+  margin-top: -22px;
+  color: crimson;
 }
 
 /*ADD ORDER*/
@@ -69,11 +80,11 @@ body {
 .add-order__form {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .add-order__buttons {
   display: block;
-  margin: 0 auto;
   width: 115px;
   height: 25px;
   background: #D9D9D9;
@@ -83,16 +94,18 @@ body {
 
 /*INPUT*/
 .inputs {
+  display: block;
   width: 180px;
   height: 34px;
-  padding: 11px 107px 8px 17px;
+  padding: 11px 17px 8px 17px;
   background-color: #FFFEFE;
-  margin-bottom: 32px;
   border: none;
+  margin-bottom: 32px;
 }
 
 .inputs::placeholder {
   color: #000000;
+  width: 100%;
 }
 
 /*BUTTONS*/
@@ -114,28 +127,28 @@ body {
 
 /*POPUP*/
 .popup-wrapper {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100vh;
-  height: 100vh;
-  background-color: dimgrey;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup {
   width: 335px;
   height: 215px;
+  padding: 63px 44px 42px 44px;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%);
+  background: #E2E1E1;
 }
 
 .popup__btns {
   display: flex;
+  margin-top: 68px;
 }
 
 /*ORDERS TABLE*/
@@ -150,6 +163,7 @@ td, th {
 
 .orders__table {
   margin: 75px auto;
+  width: 682px;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -157,9 +171,6 @@ td, th {
   background-color: #D9D9D9;
 }
 
-.table-header {
-
-}
 
 .table__row {
   position: relative;
@@ -199,4 +210,8 @@ td, th {
 
 .completed-order {
   background-color: lightgreen;
+}
+
+.clickable {
+  cursor: pointer;
 }

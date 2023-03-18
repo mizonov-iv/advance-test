@@ -6,6 +6,7 @@ import {useRouter} from "vue-router";
 
 export const useAuthStore = defineStore("user", () => {
     const router = useRouter()
+
     const userInput = ref({
         user: "",
         password: "",
@@ -15,12 +16,17 @@ export const useAuthStore = defineStore("user", () => {
 
     let validationsErrors: any = ref([])
 
+    const authorizedUser = ref({
+        name: "",
+        role: ""
+    })
+
     // UPDATE USERS INPUT
     const updateUserInput = (user: string, password: any) => {
         userInput.value.user = user
         userInput.value.password = password
-        console.log(userInput.value)
     }
+
     // LOGIN VALIDATION
     const validate = () => {
 
@@ -42,11 +48,11 @@ export const useAuthStore = defineStore("user", () => {
     }
 
     // LOGIN LOGIC
-    const login = (user: string, password: any) => {
+    const login = async (user: string, password: any) => {
         updateUserInput(user, password)
 
         if (validate()) {
-            axios.get('http://localhost:3000/users/' + userInput.value.user)
+            await axios.get('http://localhost:3000/users/' + userInput.value.user)
                 .then(resp => {
                     console.log(resp)
                     if (Object.keys(resp).length === 0) {
@@ -56,8 +62,9 @@ export const useAuthStore = defineStore("user", () => {
                         if (resp.data.password === userInput.value.password) {
                             console.log('Success');
                             router.push('/orders')
-                            // sessionStorage.setItem('username', userInput.value.user);
-                            // sessionStorage.setItem('userrole',resp.data.role);
+                            authorizedUser.value.name = resp.data.name
+                            authorizedUser.value.role = resp.data.role
+                            console.log(authorizedUser.value)
                         } else {
                             validationsErrors.value.push('Неправильный пароль');
                             console.log('Неправильный пароль');
@@ -71,10 +78,18 @@ export const useAuthStore = defineStore("user", () => {
         }
     }
 
+    const goToLoginPage = () => {
+        authorizedUser.value.name = ""
+        authorizedUser.value.role = ""
+        router.push('/')
+    }
+
     return {
         userInput,
         updateUserInput,
         login,
-        validationsErrors
+        validationsErrors,
+        authorizedUser,
+        goToLoginPage
     }
 })

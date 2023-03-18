@@ -3,18 +3,14 @@ import Navbar from './components/NavBar.vue'
 import {useOrdersStore} from "./stores/OrdersStore";
 import {onMounted} from "vue";
 
-const view = "auth"
-const store = useOrdersStore();
+const ordersStore = useOrdersStore();
 
 onMounted(() => {
-  store.getAllOrders()
+  ordersStore.getAllOrders()
 })
 </script>
 
 <template>
-  <Navbar :view="view"/>
+  <Navbar />
   <RouterView />
 </template>
-
-<style scoped>
-</style>

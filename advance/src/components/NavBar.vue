@@ -1,19 +1,23 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" v-if="store.authorizedUser.name !== ''">
     <div class="navbar__item">
       <router-link class="navbar__link" to="/orders">Все заказы</router-link>
       <router-link class="navbar__link" to="/add-order">Добавить заказ</router-link>
     </div>
     <div class="navbar__item">
-      <div>Имя Фамилия</div>
-      <button class="navbar__btn">Выйти</button>
+      <div>{{store.authorizedUser.name}}</div>
+      <button class="navbar__btn" @click="exit">Выйти</button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: ["view"]
+<script setup>
+import {useAuthStore} from "../stores/AuthStore.ts";
+
+const store = useAuthStore()
+
+const exit = () => {
+  store.goToLoginPage()
 }
 </script>
 

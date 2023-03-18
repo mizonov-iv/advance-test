@@ -17,33 +17,26 @@ export const useOrdersStore = defineStore("orders", () => {
              })
     }
 
-    const addNewOrder = (newOrder: any) => {
-        const newOrderID = returnLastItem(allOrders.value)
-        const order = {...newOrder, id: newOrderID}
-        console.log(order)
-        allOrders.value.push(order)
-        console.log(allOrders.value)
+    const addNewOrder = async (newOrder: any) => {
+        const newOrderID = returnLastItem(allOrders.value) + 1
+        await axios.post("http://localhost:3000/events/", {...newOrder, id: newOrderID})
+        getAllOrders()
         router.push('/orders')
     }
 
     const returnLastItem = (arr: any) => {
-        return arr[arr.length - 1]
+        return arr[arr.length - 1].id
     }
-
-    // const deleteOrder = (order: any) => {
-    //     allOrders.value = allOrders.value.filter((element: any) => element.id !== order.id)
-    // }
 
     const deleteOrder = async (order: any) => {
         await axios.delete(`http://localhost:3000/events/${order.id}`)
         getAllOrders()
-        // allOrders.value = allOrders.value.filter((element: any) => element.id !== order.id)
     }
 
-    const completeTheOrder = (order: any) => {
+    const completeTheOrder =  async (order: any) => {
         console.log(order.status)
-        order.status = "Выполнен"
-        console.log(order.status)
+        await axios.put(`http://localhost:3000/events/${order.id}`, {...order, status: "Выполнен"})
+        getAllOrders()
     }
 
     return {
