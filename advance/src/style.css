@@ -1,7 +1,7 @@
 /*FONTS*/
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-/*BASE*/
+/*GLOBAL*/
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +17,7 @@ body {
   max-width: 1920px;
 }
 
-/*NAVBAR*/
+/*NAVBAR COMPONENT*/
 .navbar {
   display: flex;
   flex-direction: row;
@@ -63,7 +63,7 @@ body {
   color: crimson;
 }
 
-/*ADD ORDER*/
+/*ADD ORDER VIEW*/
 .add-order__wrapper {
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ body {
 }
 
 
-/*INPUT*/
+/*INPUTS*/
 .inputs {
   display: block;
   width: 180px;
@@ -214,4 +214,10 @@ td, th {
 
 .clickable {
   cursor: pointer;
+}
+
+.empty-list {
+  padding: 30px;
+  font-size: 16px;
+  text-align: center;
 }

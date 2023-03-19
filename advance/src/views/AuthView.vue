@@ -35,22 +35,22 @@
 import {useAuthStore} from "../stores/AuthStore";
 import {ref} from "vue";
 
-const store = useAuthStore()
+const store = useAuthStore();
 
-let usernameInput = ref("")
-let passwordInput = ref("")
-let btnDisabled = ref(false)
+const usernameInput = ref("");
+const passwordInput = ref("");
+let btnDisabled = ref(false);
 
 const onInputUpdate = () => {
-  store.validationsErrors.length = 0
+  store.validationsErrors.length = 0;
   if (usernameInput.value && passwordInput.value) {
     btnDisabled = true;
   }
 }
 
 const submitForm = () => {
-  store.login(usernameInput.value, passwordInput.value)
-  usernameInput.value = ""
-  passwordInput.value = ""
+  store.login(usernameInput.value, passwordInput.value);
+  usernameInput.value = "";
+  passwordInput.value = "";
 }
 </script>

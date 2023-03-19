@@ -14,13 +14,9 @@
 <script setup>
 import {useAuthStore} from "../stores/AuthStore.ts";
 
-const store = useAuthStore()
+const store = useAuthStore();
 
 const exit = () => {
-  store.goToLoginPage()
+  store.goToLoginPage();
 }
 </script>
-
-<style scoped>
-
-</style>

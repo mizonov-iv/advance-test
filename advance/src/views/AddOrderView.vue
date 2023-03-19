@@ -41,19 +41,19 @@ import {useOrdersStore} from "../stores/OrdersStore.ts";
 import {useAuthStore} from "../stores/AuthStore.ts";
 import {ref} from "vue";
 
-const ordersStore = useOrdersStore()
-const authStore = useAuthStore()
+const ordersStore = useOrdersStore();
+const authStore = useAuthStore();
 
-const name = ref(authStore.authorizedUser.name)
-const address = ref("")
-const comment = ref("")
+const name = ref(authStore.authorizedUser.name);
+const address = ref("");
+const comment = ref("");
 const date = ref(new Date().toLocaleString("ru", {
   year: "numeric",
   month: "long",
   day: "numeric"
 }))
 
-let btnDisabled = ref(false)
+let btnDisabled = ref(false);
 
 const onInputUpdate = () => {
   if (name.value && address.value) {
@@ -70,15 +70,10 @@ const addOrder = () => {
     comment: comment.value
   }
 
-  ordersStore.addNewOrder(newOrder)
+  ordersStore.addNewOrder(newOrder);
 
-  name.value = ""
-  address.value = ""
-  comment.value = ""
+  name.value = "";
+  address.value = "";
+  comment.value = "";
 }
-
 </script>
-
-<style scoped>
-
-</style>

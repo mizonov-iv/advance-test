@@ -29,7 +29,7 @@
     </tr>
     </tbody>
   </table>
-  <div v-else>Заказы отсутсвуют</div>
+  <div class="empty-list" v-else>Заказы отсутсвуют</div>
   <PopUp
       :open="popupIsOpen"
       :order="selectedOrder"
@@ -47,35 +47,28 @@ import {ref} from "vue";
 const ordersStore = useOrdersStore();
 const authStore = useAuthStore();
 
-let popupIsOpen = ref(false)
-let selectedOrder = ref({})
+let popupIsOpen = ref(false);
+let selectedOrder = ref({});
 
 const showPopup = ref((order) => {
-  popupIsOpen.value = true
-  selectedOrder = order
+  popupIsOpen.value = true;
+  selectedOrder = order;
 })
 
 const deleteOrder = (order) => {
-  console.log(order)
-  ordersStore.deleteOrder(order)
-  popupIsOpen.value = false
+  ordersStore.deleteOrder(order);
+  popupIsOpen.value = false;
 }
 
 const markAsCompleted = (order) => {
-  ordersStore.completeTheOrder(order)
+  ordersStore.completeTheOrder(order);
 }
 
 const sortByAddress = () => {
-  ordersStore.allOrders.sort((a, b) => a.address.localeCompare(b.address))
+  ordersStore.allOrders.sort((a, b) => a.address.localeCompare(b.address));
 }
 
 const sortByDate = () => {
-  ordersStore.allOrders.sort((a, b) => a.date.localeCompare(b.date))
-
+  ordersStore.allOrders.sort((a, b) => a.date.localeCompare(b.date));
 }
-
 </script>
-
-<style scoped>
-
-</style>

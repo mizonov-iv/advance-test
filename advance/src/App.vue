@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Navbar from './components/NavBar.vue'
+import Navbar from './components/NavBar.vue';
 import {useOrdersStore} from "./stores/OrdersStore";
 import {onMounted} from "vue";
 
 const ordersStore = useOrdersStore();
 
 onMounted(() => {
-  ordersStore.getAllOrders()
+  ordersStore.getAllOrders();
 })
 </script>
 
