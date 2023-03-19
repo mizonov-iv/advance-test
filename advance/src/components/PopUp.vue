@@ -1,7 +1,7 @@
 <template>
   <div class="popup-wrapper" v-show="props.open">
     <div class="popup">
-      <p>Вы действительно хотите удалить заказ?</p>
+      <p class="popup__header">Вы действительно хотите удалить заказ?</p>
       <div class="popup__btns">
         <button class="buttons" @click="$emit('deleteOrder', props.order)">Ок</button>
         <button class="buttons" @click="$emit('close')">Отмена</button>
